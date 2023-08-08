@@ -1,6 +1,7 @@
 import request from 'supertest';
 import nock from 'nock';
 import { app } from '../../app';
+import { UnspentOutput } from '../../client/client';
 
 // A wallet address used throughout the tests
 const address = '31otE5wkfiCSXcQPjfWZ8eLuZRFZfLrmci';
@@ -71,6 +72,43 @@ beforeAll(() => {
     .get('/unspent')
     .query({ active: address })
     .reply(200, { unspent_outputs: unspentOutputs });
+});
+
+/* GIVEN a list of outputs with values 3, 8, 6, 9, 1
+ * AND   a purchase amount of 7
+ * WHEN  request to /api/prepare-unspent-outputs is made
+ * THEN  outputs with values 1 & 6 should be returned */
+it('uses zero strategy if possible', async () => {
+  const response = await request(app)
+    .get('/api/prepare-unspent-outputs')
+    .query({ address, amount: 7 })
+    .send();
+
+  expect(response.status).toBe(200);
+  expect((response.body as UnspentOutput[]).sort((a, b) => a.value - b.value)).toEqual(([
+    {
+      tx_hash_big_endian:
+        'f35b0fd3954cfdc817cf1a2747236b3a105886a986fbbfbb222b0af1584333fa',
+      tx_hash: 'fa334358f10a2b22bbbffb86a98658103a6b2347271acf17c8fd4c95d30f5bf3',
+      tx_output_n: 2,
+      script: 'a914014c7c73f43e33a099f915761cd0ff5d1145183287',
+      value: 6,
+      value_hex: '040356',
+      confirmations: 1095,
+      tx_index: 8803138565710149,
+    },
+    {
+      tx_hash_big_endian:
+        'f35b0fd3954cfdc817cf1a2747236b3a105886a986fbbfbb222b0af1584333fa',
+      tx_hash: 'fa334358f10a2b22bbbffb86a98658103a6b2347271acf17c8fd4c95d30f5bf3',
+      tx_output_n: 4,
+      script: 'a914014c7c73f43e33a099f915761cd0ff5d1145183287',
+      value: 1,
+      value_hex: '040356',
+      confirmations: 1095,
+      tx_index: 8803138565710149,
+    },
+  ]).sort((a, b) => a.value - b.value));
 });
 
 /* GIVEN a list of outputs with values 3, 8, 6, 9, 1

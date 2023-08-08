@@ -1,0 +1,15 @@
+Some notes related to the assignment
+
+- For strategy 0, a lot of comments are added for explanation, it should not be that many comments in the code normally
+- For strategy 0, it is using recursion so it could cause unforeseen problem when the size of output increased. 
+- Test case is added for strategy 0
+- Below are the command I used for installing some package to help to complete the task
+// for env variable
+npm i dotenv 
+// for making API call to blockchain.info
+npm i axios
+npm i --save-dev @types/axios
+// for validating BTC address
+npm install bitcoinjs-lib
+
+Thank you!!
