@@ -1,10 +1,10 @@
 {
-  "name": "zumokit-test-day",
+  "name": "btc-unspent-output",
   "version": "1.0.0",
-  "description": "ZumoKit team test day assignment",
+  "description": "BTC Unspent output",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zumo/zumokit-test-day.git"
+    "url": ""
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",

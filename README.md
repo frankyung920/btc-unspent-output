@@ -1,4 +1,4 @@
-# Zumo Backend Engineer Tech Assignment
+# BTC Unspent output 
 
 The fundamental building block of a bitcoin transaction is an unspent transaction output, or UTXO. UTXO are indivisible chunks of bitcoin currency locked to a specific owner, recorded on the blockchain, and recognized as currency units by the entire network. The bitcoin network tracks all available (unspent) UTXO currently numbering in the millions. Whenever a user receives bitcoin, that amount is recorded within the blockchain as a UTXO. Thus, a user’s bitcoin might be scattered as UTXO amongst hundreds of transactions and hundreds of blocks. In effect, there is no such thing as a stored balance of a bitcoin address or account; there are only scattered UTXO, locked to specific owners. The concept of a user’s bitcoin balance is a derived construct created by the wallet application. The wallet calculates the user’s balance by scanning the blockchain and aggregating all UTXO belonging to that user.
 
@@ -22,9 +22,8 @@ Complete missing functionality of endpoint defined in `src/routes/prepare-unspen
 
 First strategy is akin to trying to get rid of the change in your wallet, while second strategy is fallback strategy when you didn't have enough coins after all and are forced to use banknotes as well.
 
-### Bonus Task
-
-If you like a challenge you can also implement an additional strategy (strategy 0) that tries to find an exact match from the output list. For example, with a list of outputs 3, 8, 6, 9, 1 and purchase amount of 7 our strategy should return outputs 1 & 6 instead of outputs 1, 3 & 6.
+* strategy 0
+Strategy 0 tries to find an exact match from the output list. For example, with a list of outputs 3, 8, 6, 9, 1 and purchase amount of 7 our strategy should return outputs 1 & 6 instead of outputs 1, 3 & 6.
 
 ## Examples
 
